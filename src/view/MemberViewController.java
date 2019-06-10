@@ -25,6 +25,7 @@ public class MemberViewController implements Initializable {
 	@FXML	private Button btnCreate;
 	@FXML	private Button btnUpdate;
 	@FXML	private Button btnDelete;
+	@FXML	private Button btnMessegeBox;
 	
 	@FXML	private Button btnExecute;
 	@FXML	private TextArea taExecute;
@@ -39,7 +40,7 @@ public class MemberViewController implements Initializable {
 	@FXML	private TableColumn<Member, String> columnName;
 	@FXML	private TableColumn<Member, String> columnID;
 	@FXML	private TableColumn<Member, String> columnPW;
-	//@FXML	private TableColumn<Member, String> columnMobilePhone;
+	@FXML	private TableColumn<Member, String> columnMobilePhone;
 	
 	// Member : model이라고도 하고 DTO, VO 라고도 함
 	// 시스템 밖에 저장된 정보를 객체들간에 사용하는 정보로 변환한 자료구조 또는 객체
@@ -61,17 +62,26 @@ public class MemberViewController implements Initializable {
 		columnName.setCellValueFactory(cvf -> cvf.getValue().unameProperty());				
 		columnID.setCellValueFactory(cvf -> cvf.getValue().uidProperty());
 		columnPW.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
+		columnMobilePhone.setCellValueFactory(cvf -> cvf.getValue().mobilePhoneProperty());
 		
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
 
 		btnCreate.setOnMouseClicked(event -> handleCreate());		
-		// btnDelete.setOnMouseClicked(e -> handleDelete());		
-		btnExecute.setOnMouseClicked(event -> handleExecute());	
+		btnDelete.setOnMouseClicked(event -> handleDelete());
+		btnUpdate.setOnMouseClicked(event -> handleUpdate());
+		btnMessegeBox.setOnMouseClicked(event -> handleMessegeBox());
+		
+		btnExecute.setOnMouseClicked(event -> handleExecute());
 		
 		loadMemberTableView();
 	}
 	String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
+	
+	@FXML 
+	private void handleMessegeBox() { // event source, listener, handler
+		this.showAlert("메시지 박스가 나타납니다.");
+	}
 	@FXML 
 	private void handleExecute() { // event source, listener, handler
 		str = str + tfExecute.getText() + "\n";
@@ -89,13 +99,13 @@ public class MemberViewController implements Initializable {
 			tfID.setText(member.getUid());
 			tfPW.setText(member.getUpw());
 			tfName.setText(member.getUname());
-//			tfMobilePhone.setText(member.getMobilePhone());
+			tfMobilePhone.setText(member.getMobilePhone());
 		}
 		 else {
 			 tfID.setText("");
 			 tfPW.setText("");
 		     tfName.setText("");
-//		     tfMobilePhone.setText("010");
+		     tfMobilePhone.setText("010");
 		 }
 	}
 	
@@ -112,7 +122,7 @@ public class MemberViewController implements Initializable {
 	private void handleCreate() { // event source, listener, handler
 		if(tfID.getText().length() > 0) {
 			Member newMember = 
-					new Member(tfID.getText(), tfPW.getText(), tfName.getText(), "");
+					new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText());
 			data.add(newMember);			
 			tableViewMember.setItems(data);
 			memberService.create(newMember);
@@ -145,8 +155,8 @@ public class MemberViewController implements Initializable {
 	private void showAlert(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
         alert.initOwner(mainApp.getRootStage());
-        alert.setTitle("Ȯ��");
-        alert.setContentText("Ȯ�� : " + message);            
+        alert.setTitle("알림");
+        alert.setContentText("경고 : " + message);            
         alert.showAndWait();
 	}
 

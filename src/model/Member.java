@@ -10,7 +10,7 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	private StringProperty uid; // DB의 필드와 매핑
 	private StringProperty upw;
 	private StringProperty uname;
-	private final StringProperty mobilePhone;
+	private StringProperty mobilePhone;
 	/*
     private final IntegerProperty zipcode;
     private ObjectProperty<LocalDate> birthday;
