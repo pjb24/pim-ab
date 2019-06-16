@@ -15,9 +15,13 @@ public class MemberFileWriter {
 	public void saveMember(ArrayList<Member> memberList) {
 		for(Member m : memberList) {
 			try {
-				fw.write(m.getUid() + "\t");
-				fw.write(m.getUpw() + "\t");
-				fw.write(m.getUname() + "\n");
+				fw.write(m.getEmail() + "\t");
+				fw.write(m.getPw() + "\t");
+				fw.write(m.getName() + "\t");
+				fw.write(m.getBirth() + "\t");
+				fw.write(m.getAge() + "\t");
+				fw.write(m.getAddress() + "\t");
+				fw.write(m.getContact() + "\n");
 				fw.flush();
 			} catch (IOException e) {
 			}			

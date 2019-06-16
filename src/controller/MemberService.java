@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import model.Member;
 
 public interface MemberService {	
@@ -9,5 +11,7 @@ public interface MemberService {
 	ArrayList<Member> readList();
 	int update(Member member);
 	int delete(Member member);	
-	int findByUid(Member member);	
+	int findByEmail(Member member);
+	List<Member> findByAddress(String address);
+	List<Member> findByName(String name);
 }

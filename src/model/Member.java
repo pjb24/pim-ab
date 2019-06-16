@@ -7,62 +7,98 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Member { // DB의 레코드와 매핑되는 객체
-	private StringProperty uid; // DB의 필드와 매핑
-	private StringProperty upw;
-	private StringProperty uname;
-	private final StringProperty mobilePhone;
+	private StringProperty email; // DB의 필드와 매핑
+	private StringProperty pw;
+	private StringProperty name;
+	private StringProperty birth;
+	private StringProperty age;
+	private StringProperty address;
+	private StringProperty contact;
 	/*
     private final IntegerProperty zipcode;
     private ObjectProperty<LocalDate> birthday;
 	*/
 	public Member() {
-		this(null, null, null, null);
+		this(null, null, null, null, null, null, null);
 	}
 	
-	public Member(String id, String pw, String name, String mobilePhone) {
-		this.uid = new SimpleStringProperty(id);
-		this.uname = new SimpleStringProperty(name);
-		this.upw = new SimpleStringProperty(pw);
-		this.mobilePhone = new SimpleStringProperty(mobilePhone);
+	public Member(String email, String pw, String name, String birth, String age, String address, String contact) {
+		this.email = new SimpleStringProperty(email);
+		this.pw = new SimpleStringProperty(pw);
+		this.name = new SimpleStringProperty(name);
+		this.birth = new SimpleStringProperty(birth);
+		this.age = new SimpleStringProperty(age);
+		this.address = new SimpleStringProperty(address);
+		this.contact = new SimpleStringProperty(contact);
 	}
 	
-	public String getUid() {
-		return this.uid.get();
+	public String getEmail() {
+		return this.email.get();
 	}
-	public void setUid(String uid) {
-		this.uid.set(uid);
+	public void setEmail(String email) {
+		this.email.set(email);
 	}
-    public StringProperty uidProperty() {
-        return uid;
+    public StringProperty emailProperty() {
+        return email;
     }
     
-    public String getUpw() {
-    	return this.upw.get();
+    public String getPw() {
+    	return this.pw.get();
     }
-    public void setUpw(String upw) {
-    	this.upw.set(upw);
+    public void setPw(String pw) {
+    	this.pw.set(pw);
     }
-    public StringProperty upwProperty() {
-        return upw;
-    }
-    
-    public String getUname() {
-    	return this.uname.get();
-    }
-    public void setUname(String uname) {
-    	this.uname.set(uname);
-    }
-    public StringProperty unameProperty() {
-        return uname;
+    public StringProperty pwProperty() {
+        return pw;
     }
     
-	public String getMobilePhone() {
-		return this.mobilePhone.get();
+    public String getName() {
+    	return this.name.get();
+    }
+    public void setName(String name) {
+    	this.name.set(name);
+    }
+    public StringProperty nameProperty() {
+        return name;
+    }
+    
+	public String getBirth() {
+		return this.birth.get();
 	}
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone.set(mobilePhone);
+	public void setBirth(String birth) {
+		this.birth.set(birth);
 	}
-    public StringProperty mobilePhoneProperty() {
-        return mobilePhone;
+    public StringProperty birthProperty() {
+        return birth;
+    }
+    
+    public String getAge() {
+		return this.age.get();
+	}
+	public void setAge(String age) {
+		this.age.set(age);
+	}
+    public StringProperty ageProperty() {
+        return age;
+    }
+    
+    public String getAddress() {
+		return this.address.get();
+	}
+	public void setAddress(String address) {
+		this.address.set(address);
+	}
+    public StringProperty addressProperty() {
+        return address;
+    }
+    
+    public String getContact() {
+		return this.contact.get();
+	}
+	public void setContact(String contact) {
+		this.contact.set(contact);
+	}
+    public StringProperty contactProperty() {
+        return contact;
     }
 }
