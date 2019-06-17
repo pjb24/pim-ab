@@ -13,5 +13,6 @@ public interface MemberService {
 	int delete(Member member);	
 	int findByEmail(Member member);
 	List<Member> findByAddress(String address);
-	List<Member> findByName(String name);
+	List<Member> findBySex(String name);
+	List<Member> findByAge(String name);
 }

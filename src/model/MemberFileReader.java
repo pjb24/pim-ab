@@ -19,12 +19,13 @@ public class MemberFileReader {
 			Member m = new Member();
 			String strArr[] = sc.nextLine().split("\t");
 			m.setEmail(strArr[0]);
-			m.setPw(strArr[1]);
-			m.setName(strArr[2]);
-			m.setBirth(strArr[3]);
-			m.setAge(strArr[4]);
+			m.setName(strArr[1]);
+			m.setBirth(strArr[2]);
+			m.setAge(strArr[3]);
+			m.setSex(strArr[4]);
 			m.setAddress(strArr[5]);
-			m.setContact(strArr[6]);
+			m.setAreaCode(strArr[6]);
+			m.setContact(strArr[7]);
 			retObj.add(m);			
 		}
 		return retObj;

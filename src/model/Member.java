@@ -8,27 +8,29 @@ import javafx.beans.property.StringProperty;
 
 public class Member { // DB의 레코드와 매핑되는 객체
 	private StringProperty email; // DB의 필드와 매핑
-	private StringProperty pw;
 	private StringProperty name;
 	private StringProperty birth;
 	private StringProperty age;
+	private StringProperty sex;
 	private StringProperty address;
+	private StringProperty areaCode;
 	private StringProperty contact;
 	/*
     private final IntegerProperty zipcode;
     private ObjectProperty<LocalDate> birthday;
 	*/
 	public Member() {
-		this(null, null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null, null);
 	}
 	
-	public Member(String email, String pw, String name, String birth, String age, String address, String contact) {
+	public Member(String email, String name, String birth, String age, String sex, String address, String areaCode, String contact) {
 		this.email = new SimpleStringProperty(email);
-		this.pw = new SimpleStringProperty(pw);
 		this.name = new SimpleStringProperty(name);
 		this.birth = new SimpleStringProperty(birth);
 		this.age = new SimpleStringProperty(age);
+		this.sex = new SimpleStringProperty(sex);
 		this.address = new SimpleStringProperty(address);
+		this.areaCode = new SimpleStringProperty(areaCode);
 		this.contact = new SimpleStringProperty(contact);
 	}
 	
@@ -40,16 +42,6 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	}
     public StringProperty emailProperty() {
         return email;
-    }
-    
-    public String getPw() {
-    	return this.pw.get();
-    }
-    public void setPw(String pw) {
-    	this.pw.set(pw);
-    }
-    public StringProperty pwProperty() {
-        return pw;
     }
     
     public String getName() {
@@ -82,6 +74,16 @@ public class Member { // DB의 레코드와 매핑되는 객체
         return age;
     }
     
+    public String getSex() {
+		return this.sex.get();
+	}
+	public void setSex(String sex) {
+		this.sex.set(sex);
+	}
+    public StringProperty sexProperty() {
+        return sex;
+    }
+    
     public String getAddress() {
 		return this.address.get();
 	}
@@ -90,6 +92,16 @@ public class Member { // DB의 레코드와 매핑되는 객체
 	}
     public StringProperty addressProperty() {
         return address;
+    }
+    
+    public String getAreaCode() {
+		return this.areaCode.get();
+	}
+	public void setAreaCode(String areaCode) {
+		this.areaCode.set(areaCode);
+	}
+    public StringProperty areaCodeProperty() {
+        return areaCode;
     }
     
     public String getContact() {

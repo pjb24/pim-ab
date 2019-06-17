@@ -59,6 +59,9 @@ public class MemberDAO {
 			if(index < 0) { // -1이면 검색 실패, 등록 가능함
 				fw = new MemberFileWriter(file);
 				calculateAge(member);
+				calculateSex(member);
+				calculateAreaCode(member);
+				calculateContact(member);
 				memberList.add(member);
 				fw.saveMember(memberList);
 				ret = 0;
@@ -77,6 +80,9 @@ public class MemberDAO {
 				fw = new MemberFileWriter(file);
 				memberList.set(index, member);
 				calculateAge(member);
+				calculateSex(member);
+				calculateAreaCode(member);
+				calculateContact(member);
 				fw.saveMember(memberList);
 				ret = 0;
 			}
@@ -114,11 +120,23 @@ public class MemberDAO {
 		return searched;
 	}
 	
-	public List<Member> searchByName(String name) {
+	public List<Member> searchBySex(String sex) {
 		// 검색 결과를 저장할 ArrayList 형 객체 생성
 		List<Member> searched = new ArrayList<Member>();
 		for (Member m : memberList) {
-			if (m.getName().equals(name)) {
+			if (m.getSex().equals(sex)) {
+				searched.add(m);	// 검색된 정보를 추가함
+			}
+			// 검색이 안된 경우 스킵
+		}
+		return searched;
+	}
+	
+	public List<Member> searchByAge(String age) {
+		// 검색 결과를 저장할 ArrayList 형 객체 생성
+		List<Member> searched = new ArrayList<Member>();
+		for (Member m : memberList) {
+			if (m.getAge().equals(age)) {
 				searched.add(m);	// 검색된 정보를 추가함
 			}
 			// 검색이 안된 경우 스킵
@@ -129,9 +147,67 @@ public class MemberDAO {
 	public void calculateAge(Member member) {
 		String birth = member.getBirth();
 		Calendar cal = Calendar.getInstance();
-		int year = cal.get(cal.YEAR) - Integer.parseInt(birth.substring(0, 4));
-		String age = Integer.toString(year);
-		member.setAge(age);
+		String sex = birth.substring(7, 8);
+		int month = Integer.parseInt(birth.substring(2, 4));	// 태어난 달
+		int date = Integer.parseInt(birth.substring(4, 6));		// 태어난 날
+		if (sex.equals("1") || sex.equals("2")) {
+			int year = Integer.parseInt(birth.substring(0, 2)) + 1900;
+			year = cal.get(cal.YEAR) - year;
+			if (month < cal.get(cal.MONTH)+1) {
+				year++;
+			}
+			else if (month == cal.get(cal.MONTH)+1) {
+					if (date <= cal.get(cal.DATE)) year++;
+			}
+			String age = Integer.toString(year);
+			member.setAge(age);
+		}
+		else {
+			int year = Integer.parseInt(birth.substring(0, 2)) + 2000;
+			year = cal.get(cal.YEAR) - year;
+			if (month < cal.get(cal.MONTH)+1) {
+				year++;
+			}
+			else if (month == cal.get(cal.MONTH)+1) {
+					if (date <= cal.get(cal.DATE)) year++;
+			}
+			String age = Integer.toString(year);
+			member.setAge(age);
+		}
+	}
+	
+	public void calculateSex(Member member) {
+		String birth = member.getBirth();
+		String sex = birth.substring(7, 8);
+		if (sex.equals("1") || sex.equals("3")) {
+			member.setSex("남");
+		}
+		else {
+			member.setSex("여");
+		}
+	}
+	
+	public void calculateAreaCode(Member member) {
+		String address = member.getAddress();
+		address = address.substring(0, 2);
+		if (address.equals("서울")) {
+			member.setAreaCode("02");
+		}
+		else if (address.equals("경기")) {
+			member.setAreaCode("031");
+		}
+		else if (address.equals("인천")) {
+			member.setAreaCode("032");
+		}
+		else {
+			member.setAreaCode("077");
+		}
+	}
+	
+	public void calculateContact(Member member) {
+		String areaCode = member.getAreaCode();
+		String contact = member.getContact();
+		member.setContact(areaCode + contact);
 	}
 	
 	public void printMemberList() {
